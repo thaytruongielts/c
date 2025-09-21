@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Kéo Thả Câu Tường Thuật</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            margin-bottom: 25px;
+        }
+        .words-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 15px;
+            margin-bottom: 30px;
+            border: 2px dashed #a0c4ff;
+            border-radius: 8px;
+            background-color: #e6f0ff;
+        }
+        .word {
+            background-color: #4285f4;
+            color: white;
+            padding: 10px 18px;
+            margin: 6px;
+            border-radius: 25px;
+            cursor: grab;
+            user-select: none;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .word:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .word:active {
+            cursor: grabbing;
+        }
+        .question-group {
+            margin-bottom: 25px;
+            border-left: 4px solid #1a73e8;
+            padding-left: 15px;
+        }
+        .question-title {
+            font-weight: bold;
+            color: #1a73e8;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            width: 150px;
+            height: 35px;
+            border-bottom: 2px solid #1a73e8;
+            margin: 0 5px;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 35px;
+            background-color: #f8faff;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .blank.drag-over {
+            background-color: #c9e0ff;
+        }
+        .dropped-word {
+            display: block;
+            background-color: #4285f4;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            cursor: move;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            padding-top: 20px;
+            border-top: 2px dashed #ccc;
+        }
+        .correct {
+            color: #28a745;
+        }
+        .incorrect {
+            color: #dc3545;
+        }
+        .check-button {
+            display: block;
+            margin: 25px auto 0;
+            padding: 12px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Bài Tập Kéo Thả: Câu Tường Thuật</h1>
+
+    <div class="words-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+        </div>
+
+    <div id="exercise">
+        <div class="question-group">
+            <div class="question-title">A. Thay Đổi về Thì (1)</div>
+            <div class="question" data-correct-word="had done">**Trực tiếp:** Peter said: "I did it by myself." <br> **Gián tiếp:** Peter said (that) he <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> it by himself.</div>
+            <div class="question" data-correct-word="had been">**Trực tiếp:** Mary said: "I was in the park last Sunday." <br> **Gián tiếp:** Mary said (that) she <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> in the park the Sunday before.</div>
+            <div class="question" data-correct-word="was">**Trực tiếp:** She said: "I am at home." <br> **Gián tiếp:** She said (that) she <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> at home.</div>
+            <div class="question" data-correct-word="lived">**Trực tiếp:** He said: "I live in a big city." <br> **Gián tiếp:** He said (that) he <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> in a big city.</div>
+            <div class="question" data-correct-word="would call">**Trực tiếp:** Lan said: "I will call you tonight." <br> **Gián tiếp:** Lan said (that) she <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> me that night.</div>
+            <div class="question" data-correct-word="were learning">**Trực tiếp:** She said: "We are learning now." <br> **Gián tiếp:** She said (that) they <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> then.</div>
+            <div class="question" data-correct-word="had been sleeping">**Trực tiếp:** He said: "I was sleeping then." <br> **Gián tiếp:** He said (that) he <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> then.</div>
+            <div class="question" data-correct-word="had stolen">**Trực tiếp:** He said: "Someone has stolen my bag." <br> **Gián tiếp:** He said (that) someone <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> his bag.</div>
+            <div class="question" data-correct-word="had been waiting">**Trực tiếp:** She said: "I have been waiting for you for 3 hours." <br> **Gián tiếp:** She said (that) she <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> for me for 3 hours.</div>
+            <div class="question" data-correct-word="were going">**Trực tiếp:** Huong said: "We are going to have a party next weekend." <br> **Gián tiếp:** Huong said (that) they <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> to have a party the next weekend.</div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">B. Thay Đổi về Trạng Từ và Đại Từ (1)</div>
+            <div class="question" data-correct-word="that night">**Trực tiếp:** He said, "I will come tonight." <br> **Gián tiếp:** He said he would come <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span>.</div>
+            <div class="question" data-correct-word="the day before">**Trực tiếp:** She said, "I went there yesterday." <br> **Gián tiếp:** She said she had gone there <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span>.</div>
+            <div class="question" data-correct-word="the next day">**Trực tiếp:** He said, "I'll go to school tomorrow." <br> **Gián tiếp:** He said he would go to school <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span>.</div>
+            <div class="question" data-correct-word="those">**Trực tiếp:** He said, "I want to buy these books." <br> **Gián tiếp:** He said he wanted to buy <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> books.</div>
+            <div class="question" data-correct-word="he">**Trực tiếp:** Tom said, "I am a student." <br> **Gián tiếp:** Tom said that <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> was a student.</div>
+            <div class="question" data-correct-word="before">**Trực tiếp:** He said: "She came here a year ago." <br> **Gián tiếp:** He said she had come there a year <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span>.</div>
+            <div class="question" data-correct-word="the previous day">**Trực tiếp:** She said: "I finished my homework yesterday." <br> **Gián tiếp:** She said she had finished her homework <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span>.</div>
+            <div class="question" data-correct-word="the next morning">**Trực tiếp:** He said: "I will call you tomorrow morning." <br> **Gián tiếp:** He said he would call me <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span>.</div>
+            <div class="question" data-correct-word="then">**Trực tiếp:** She said: "I am busy now." <br> **Gián tiếp:** She said she was busy <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span>.</div>
+            <div class="question" data-correct-word="they">**Trực tiếp:** We said: "We will go to the cinema." <br> **Gián tiếp:** We said that <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> would go to the cinema.</div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">C. Thay Đổi về Động Từ Khuyết Thiếu và Loại Câu (1)</div>
+            <div class="question" data-correct-word="couldn't come">**Trực tiếp:** He said, "I can't come on time." <br> **Gián tiếp:** He said (that) he <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> on time.</div>
+            <div class="question" data-correct-word="had to">**Trực tiếp:** She said, "I must take care of my little brother." <br> **Gián tiếp:** She said (that) she <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> take care of her little brother.</div>
+            <div class="question" data-correct-word="might">**Trực tiếp:** My teacher said, "You may use dictionaries for this test." <br> **Gián tiếp:** My teacher said (that) we <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> use dictionaries for that test.</div>
+            <div class="question" data-correct-word="wouldn't have">**Trực tiếp:** He said, "You needn't come here tomorrow." <br> **Gián tiếp:** He said (that) he <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> to come there the next day.</div>
+            <div class="question" data-correct-word="asked">**Trực tiếp:** He said, "Do you want some coffee?" <br> **Gián tiếp:** He <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> me if I wanted some coffee.</div>
+            <div class="question" data-correct-word="to">**Trực tiếp:** He said to me, "Open the door." <br> **Gián tiếp:** He told me <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> open the door.</div>
+            <div class="question" data-correct-word="not to">**Trực tiếp:** He said, "Don't touch this." <br> **Gián tiếp:** He told me <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> touch that.</div>
+            <div class="question" data-correct-word="why he was">**Trực tiếp:** She asked me, "Why are you here?" <br> **Gián tiếp:** She asked me <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> there.</div>
+            <div class="question" data-correct-word="to know">**Trực tiếp:** He said, "Where is the post office?" <br> **Gián tiếp:** He wanted <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> where the post office was.</div>
+            <div class="question" data-correct-word="promise to">**Trực tiếp:** He said to her, "I will call you tomorrow." <br> **Gián tiếp:** He <span class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></span> call her the next day.</div>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <button class="check-button" onclick="checkAnswers()">Kiểm tra kết quả</button>
+
+    <div class="footer">
+        <p>Kết quả: <span id="score">0/30</span></p>
+    </div>
+</div>
+
+<script>
+    const words = [
+        "had done", "had been", "was", "lived", "would call", "were learning", "had been sleeping", "had stolen", "had been waiting", "were going",
+        "that night", "the day before", "the next day", "those", "he", "before", "the previous day", "the next morning", "then", "they",
+        "couldn't come", "had to", "might", "wouldn't have", "asked", "to", "not to", "why he was", "to know", "promise to"
+    ];
+
+    const wordsContainer = document.querySelector('.words-container');
+    const scoreElement = document.getElementById('score');
+    const totalWords = words.length;
+
+    // Shuffle the words for a new order each time
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function createWordElements() {
+        shuffleArray(words).forEach(wordText => {
+            const wordDiv = document.createElement('div');
+            wordDiv.className = 'word';
+            wordDiv.textContent = wordText;
+            wordDiv.setAttribute('draggable', true);
+            wordDiv.id = wordText.replace(/\s+/g, '-').toLowerCase();
+            wordDiv.addEventListener('dragstart', drag);
+            wordsContainer.appendChild(wordDiv);
+        });
+    }
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+        if (ev.target.classList.contains('blank')) {
+            ev.target.classList.add('drag-over');
+        }
+    }
+    
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+    
+    function drop(ev) {
+        ev.preventDefault();
+        if (ev.target.classList.contains('blank')) {
+            ev.target.classList.remove('drag-over');
+        }
+        const data = ev.dataTransfer.getData("text");
+        const draggedElement = document.getElementById(data);
+        const dropTarget = ev.target;
+        
+        if (dropTarget.classList.contains('blank')) {
+            if (dropTarget.firstChild) {
+                wordsContainer.appendChild(dropTarget.firstChild);
+            }
+            dropTarget.appendChild(draggedElement);
+        } else if (dropTarget.classList.contains('words-container')) {
+            wordsContainer.appendChild(draggedElement);
+        }
+    }
+
+    function checkAnswers() {
+        let correctCount = 0;
+        const questions = document.querySelectorAll('.question');
+        
+        questions.forEach(question => {
+            const blank = question.querySelector('.blank');
+            const correctWord = question.getAttribute('data-correct-word');
+            
+            if (blank.firstChild) {
+                const droppedWord = blank.firstChild.textContent;
+                const isCorrect = droppedWord === correctWord;
+                
+                blank.firstChild.style.backgroundColor = isCorrect ? '#28a745' : '#dc3545';
+                if (isCorrect) {
+                    correctCount++;
+                }
+            } else {
+                blank.style.backgroundColor = '#ffc107'; // Yellow for empty
+            }
+        });
+
+        scoreElement.textContent = `${correctCount}/${totalWords}`;
+    }
+
+    // Initialize the exercise
+    document.addEventListener('DOMContentLoaded', () => {
+        createWordElements();
+    });
+</script>
+
+</body>
+</html>
